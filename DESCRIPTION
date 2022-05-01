@@ -1,0 +1,14 @@
+Package: rpackage
+Type: Package
+Title: Package for MATH 4573
+Version: 0.1.0
+Author: Caleb Guinn
+Maintainer: <calebguinn@ou.edu>
+Description: Package created to store helpful statistic functions for MATH 4573.
+Encoding: UTF-8
+License: MIT + file LICENSE
+Import: grDevices
+          graphics
+          stats
+LazyData: true
+RoxygenNote: 7.1.2
