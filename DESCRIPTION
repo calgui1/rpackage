@@ -6,6 +6,7 @@ Author: Caleb Guinn
 Maintainer: <calebguinn@ou.edu>
 Description: Package created to store helpful statistic functions for MATH 4573.
 Encoding: UTF-8
+URL: https://github.com/calgui1/rpackage
 License: MIT + file LICENSE
 Import: grDevices
           graphics
