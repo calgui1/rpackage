@@ -1,7 +1,7 @@
 Package: rpackage
 Type: Package
 Title: Package for MATH 4573
-Version: 0.1.0
+Version: 0.1.1
 Author: Caleb Guinn
 Maintainer: <calebguinn@ou.edu>
 Description: Package created to store helpful statistic functions for MATH 4573.
@@ -13,3 +13,9 @@ Import: grDevices
           stats
 LazyData: true
 RoxygenNote: 7.1.2
+Depends: 
+    R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

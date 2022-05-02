@@ -1,6 +1,6 @@
 #' Maximum Likelihood Function for Beta Distribution
 #'
-#' @importFrom graphics axis contour abline points
+#' @importFrom graphics axis contour abline points par
 #' @importFrom stats dbeta
 #'
 #' @description A function that takes in a sample from the beta distribution along
@@ -38,6 +38,7 @@ mymlbeta=function(x,alpha,beta,...){  #x sample vector
     zz=cbind(zz,y)
     ## zz is the matrix with each column containing log L values, rows difft alpha, cols difft betas
   }
+  par(mar = c(2, 2, 2, 2), oma = c(2,2,2,2))
   maxl=max(exp(zz))    # max lik
   coord=which(exp(zz)==maxl,arr.ind=TRUE)  # find the co-ords of the max
   aest=alpha[coord[1]] # mxlik estimate of alpha

@@ -13,7 +13,7 @@
 #' @param ... additional labels for plot
 #'
 #' @importFrom stats dchisq density sd var rnorm
-#' @importFrom graphics lines curve legend hist text
+#' @importFrom graphics lines curve legend hist text par
 #'
 #' @return Chisq Plot of input sample, Chi-Squared Statistic w, summary for the
 #' statistic, and the standard deviations of the statistic.
@@ -30,6 +30,7 @@ mychisim<-function(n,sigma,mean,iter,ymax,...){
 
   w=(n-1)*ssq/sigma^2      #chi-sq stat
 
+  par(mar = c(2, 2, 2, 2), oma = c(2,2,2,2))
   hist(w,freq=FALSE, ylim=c(0,ymax), # Histogram with annotation
 
        main=substitute(paste("Sample size = ",n[1]," = ",n," statistic = ",chi^2)),

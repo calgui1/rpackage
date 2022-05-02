@@ -1,7 +1,7 @@
 #' Central Limit Theorem Function for Poisson Distribution
 #'
 #' @importFrom stats rpois dnorm dpois
-#' @importFrom graphics layout barplot
+#' @importFrom graphics layout barplot par
 #' @importFrom grDevices rainbow
 #'
 #' @description Takes in the number of values per iteration, number of iterations,
@@ -45,21 +45,22 @@ mycltp=function(n,iter,lambda,...){
   ## Make a suitable layout for graphing
   layout(matrix(c(1,1,2,3),nrow=2,ncol=2, byrow=TRUE))
 
+  par(mar = c(2, 2, 2, 2), oma = c(2,2,2,2))
+
   ## Now we can make the histogram
-  h=hist(w,freq=FALSE,  ylim=c(0,ymax), col=rainbow(max(w)),
+  hist(w,freq=FALSE,  ylim=c(0,ymax), col=rainbow(max(w)),
        main=paste("Histogram of sample mean","\n", "sample size= ",n," iter=",iter," lambda=",lambda,sep=""),
        xlab="Sample mean",...)
   ## add a density curve made from the sample distribution
   #lines(density(w),col="Blue",lwd=3) # add a density plot
   ## Add a theoretical normal curve
-  c=curve(dnorm(x,mean=lambda,sd=sqrt(lambda/n)),add=TRUE,col="Red",lty=2,lwd=3) # add a theoretical curve
+  curve(dnorm(x,mean=lambda,sd=sqrt(lambda/n)),add=TRUE,col="Red",lty=2,lwd=3) # add a theoretical curve
 
   # Now make a new plot
   # Since y is discrete we should use a barplot
-  b=barplot(table(y)/(n*iter),col=rainbow(max(y)), main="Barplot of sampled y", ylab ="Rel. Freq",xlab="y")
+  barplot(table(y)/(n*iter),col=rainbow(max(y)), main="Barplot of sampled y", ylab ="Rel. Freq",xlab="y")
   x=0:max(y)
-  p=plot(x,dpois(x,lambda=lambda),type="h",lwd=5,col=rainbow(max(y)),
+  plot(x,dpois(x,lambda=lambda),type="h",lwd=5,col=rainbow(max(y)),
        main="Probability function for Poisson", ylab="Probability",xlab="y")
 
-  return(list(h=h,c=c,b=b,p=p))
 }

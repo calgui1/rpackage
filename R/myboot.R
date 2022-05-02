@@ -4,7 +4,7 @@
 #' for the bootstrapping technique, the function to be applied to the sample, and the alpha value for the probability statistic.
 #'
 #' @importFrom stats quantile
-#' @importFrom graphics abline segments
+#' @importFrom graphics abline segments par
 #'
 #' @param iter number of trials to be performed
 #' @param x data used to create samples
@@ -33,6 +33,8 @@ myboot<-function(x,iter,fun,alpha=0.05,cx=1.5,...){  #Notice where the ... is re
   rs.mat=matrix(y,nrow=n,ncol=iter,byrow=TRUE)
   xstat=apply(rs.mat,2,fun) # xstat is a vector and will have iter values in it
   ci=quantile(xstat,c(alpha/2,1-alpha/2))# Nice way to form a confidence interval
+
+  par(mar = c(2, 2, 2, 2), oma = c(2,2,2,2))
   # A histogram follows
   # The object para will contain the parameters used to make the histogram
   para=hist(xstat,freq=FALSE,las=1,

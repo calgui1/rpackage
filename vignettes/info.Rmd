@@ -1,0 +1,132 @@
+---
+title: "info"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{info}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.width=6, fig.height=4,fig.align = "center") 
+knitr::opts_chunk$set(collapse = TRUE,comment = "#>")
+```
+
+```{r setup}
+library(rpackage)
+```
+
+# RPackage for MATH 4573
+
+This r package was created for MATH 4573 by Caleb Guinn. This package contains 4 functions and one dataset.
+
+## Functions
+
+The functions in this package are:
+-mychisim() a Chi Squared Simulator
+-myboot() a simple Bootstrapping function
+-mymlbeta() a maximum likelihood calculator
+-mycltp() a function that demonstrates the Central Limit Theorem for the Poisson Distribution
+
+### Chi Squared Simulator
+
+You can call the function as it is and the output list will print to console.
+
+```{r}
+mychisim(n=10,sigma=4,mean=10,iter=1000,ymax=0.1)
+```
+
+Or you can assign the function to an object and the object will contain the list instead, the plot will still be shown.
+
+```{r}
+c<-mychisim(n=10,sigma=4,mean=10,iter=1000,ymax=0.1)
+```
+
+### Bootstrapping Function
+
+The function creates a bootstrapped sample from the initial sample x. The statistic for the function as well as the type of distribution can be changed to produce different outputs.
+
+#### Example 1
+
+```{r}
+set.seed(40)
+sam<-rnorm(25,mean=25,sd=10)
+myboot(x=sam,fun="mean",iter=10000, xlab="mean",col="Purple")
+```
+
+#### Example 2
+
+```{r}
+set.seed(40)
+sam<-rgamma(30,shape=2,scale=3)
+myboot(x=sam,fun="var",iter=10000,xlab="variance", col="Blue",alpha=0.20)
+```
+
+#### Example 3
+
+You can also put the function output list to an object so that only the plot is shown:
+
+
+
+```{r}
+set.seed(40)
+sam<-rbeta(30,shape1=2,shape2=3)
+b<-myboot(x=sam,fun="median",iter=10000,xlab="median", col="Yellow",alpha=0.20)
+```
+
+
+
+### Maximum Likelihood Estimator for Beta Distribution
+
+Creates a MLE for the randomly generated beta distribution.
+
+#### Example 1
+
+```{r}
+sam<-rbeta(30,shape1=3,shape2=4)
+nsam<-length(sam)
+mymlbeta(x=sample(sam,nsam,replace=TRUE),alpha=seq(0.1,20,length=100),beta=seq(0.1,20,length=100),lwd=2,labcex=1,col="steelblue")
+```
+
+#### Example 2
+```{r}
+sam<-rbeta(50,shape1=3,shape2=4)
+nsam<-length(sam)
+m<-mymlbeta(x=sample(sam,nsam,replace=TRUE),alpha=seq(0.1,20,length=100),
+beta=seq(0.1,20,length=100),lwd=2,labcex=1,col="red")
+```
+
+### Central Limit Theorem for Poisson Distribution
+
+Creates a density histogram of the sample mean for the poisson distribution generated, a frequency barplot of the sampled y, and a probability plot for the function.
+
+#### Example 1
+
+```{r}
+mycltp(n=20,iter=10000,lambda=10)
+```
+
+#### Example 2
+
+```{r}
+mycltp(n=2,iter=10000,lambda=4)
+```
+
+#### Example 3
+
+```{r}
+p<-mycltp(n=5,iter=10000,lambda=10)
+```
+
+#### Example 4
+
+```{r}
+p<-mycltp(n=5,iter=10000,lambda=4)
+```
+
+## Data
+
+```{r}
+head(POWERLOADS)
+```
+
